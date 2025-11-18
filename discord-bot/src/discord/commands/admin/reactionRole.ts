@@ -21,6 +21,7 @@ async function panelAutocomplete(interaction: any) {
   }));
 }
 
+
 createCommand({
   name: 'reaction-role',
   description: 'reactionRole module',
@@ -74,6 +75,7 @@ createCommand({
   //defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
   async run(interaction) {
     const { options, user, guild } = interaction;
+    console.log("Hello World");
 
     if (interaction.user.id !== '629734543867379732') return;
     if (!guild) return;
