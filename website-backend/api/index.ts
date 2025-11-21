@@ -21,7 +21,11 @@ async function createApp(): Promise<express.Express> {
 
     // Enable CORS
     app.enableCors({
-      origin: true,
+      origin: [
+        'https://commit-pt.vercel.app',
+        'http://localhost:5173',
+        'http://localhost:3000',
+      ],
       credentials: true,
     });
 
