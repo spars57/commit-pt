@@ -12,7 +12,6 @@
     "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.5",
@@ -20,10 +19,6 @@
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-query": "^5.90.10",
     "@tanstack/react-query-devtools": "^5.90.2",
-=======
-    "@tailwindcss/vite": "^4.0.6",
-    "@tanstack/react-devtools": "^0.7.0",
->>>>>>> master
     "@tanstack/react-router": "^1.132.0",
     "@tanstack/react-router-devtools": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
@@ -48,8 +43,4 @@
     "vitest": "^3.0.5",
     "web-vitals": "^5.1.0"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
