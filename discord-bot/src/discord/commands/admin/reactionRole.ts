@@ -8,10 +8,11 @@ import {
   inlineCode,
   InteractionContextType,
   MessageFlags,
+  AutocompleteInteraction,
 } from 'discord.js';
 
 // autocomplete helper
-async function panelAutocomplete(interaction: any) {
+async function panelAutocomplete(interaction: AutocompleteInteraction) {
   const guildId = interaction.guild?.id;
   if (!guildId) return [];
   const q = await db.reactionRolePanel.find({ guildId }).limit(25).exec();
@@ -20,7 +21,6 @@ async function panelAutocomplete(interaction: any) {
     value: String(p._id),
   }));
 }
-
 
 createCommand({
   name: 'reaction-role',
@@ -75,9 +75,14 @@ createCommand({
   //defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
   async run(interaction) {
     const { options, user, guild } = interaction;
-    console.log("Hello World");
 
-    if (interaction.user.id !== '629734543867379732') return;
+    if (interaction.user.id !== '629734543867379732') {
+      await interaction.reply({
+        content: 'Este comando está em desenvolvimento e não está disponível no momento.',
+        flags: [MessageFlags.Ephemeral],
+      });
+      return;
+    }
     if (!guild) return;
 
     await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });

@@ -1,5 +1,7 @@
-import { brBuilder } from '@magicyan/discord';
+import { brBuilder, createRow } from '@magicyan/discord';
 import {
+  ButtonBuilder,
+  ButtonStyle,
   ComponentType,
   ContainerBuilder,
   Guild,
@@ -52,6 +54,14 @@ export async function profileMainMenu<R>(user: User, guild: Guild): Promise<R> {
     ],
   });
 
+  const row = createRow(
+    new ButtonBuilder({
+      label: 'Ver permissões',
+      customId: `profile/perms/${member.id}`,
+      style: ButtonStyle.Primary,
+    })
+  );
+
   if (bannerURL) {
     const mediaGalleryContainer = new MediaGalleryBuilder().addItems((item) =>
       item.setURL(bannerURL).setDescription(`${member.user.username} banner`)
@@ -60,7 +70,7 @@ export async function profileMainMenu<R>(user: User, guild: Guild): Promise<R> {
   }
 
   return {
-    components: [profileContainer],
+    components: [profileContainer, row],
     flags: [MessageFlags.IsComponentsV2],
     allowedMentions: {
       repliedUser: false,
