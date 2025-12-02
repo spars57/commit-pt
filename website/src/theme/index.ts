@@ -14,14 +14,36 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Inter, sans-serif',
+    body1: {
+      fontSize: '1rem',
+    },
+    h5: {
+      fontSize: '1.5rem',
+      fontWeight: 600,
+    },
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          boxShadow: '0 0 15px 0 rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1rem',
           fontFamily: 'Inter, sans-serif',
-          letterSpacing: '0.01em',
+          transition: 'transform 0.2s ease-in-out',
+          '&:hover': {
+            transform: 'scale(1.01)',
+            cursor: 'pointer',
+          },
+          '&:active': {
+            transform: 'scale(0.99)',
+          },
         },
       },
     },
