@@ -63,6 +63,16 @@ export async function reactionPanelConfig_ConfigMenu<R>(guild: Guild, title: str
     ],
   });
 
+  const contentContainer = new ContainerBuilder({
+    accent_color: hexToRgb(constants.colors.success),
+    components: [
+      {
+        type: ComponentType.TextDisplay,
+        content: `${panel.content || '*Sem mensagem configurada.*'}`,
+      },
+    ],
+  });
+
   const mappingsContainer = new ContainerBuilder({
     components: [],
   });
@@ -80,7 +90,7 @@ export async function reactionPanelConfig_ConfigMenu<R>(guild: Guild, title: str
       const role = guild.roles.cache.get(m.roleId);
       const roleLabel = role ? role.toString() : inlineCode(m.roleId);
       lines.push(
-        `${i + 1}. ${m.emojiRaw} → ${roleLabel}${m.description ? ` — ${m.description}` : ''}`
+        `${i + 1}. ${m.emojiKey} → ${roleLabel}`
       );
     }
 
@@ -92,28 +102,33 @@ export async function reactionPanelConfig_ConfigMenu<R>(guild: Guild, title: str
 
   const mainRow = createRow(
     new ButtonBuilder({
-      customId: `rr/config/add/${title}`,
+      customId: `rr/config/addMap/${title}`,
       label: 'Adicionar Mapeamento',
       style: ButtonStyle.Primary,
     }),
     new ButtonBuilder({
-      customId: `rr/config/edit/${title}`,
+      customId: `rr/config/editMap/${title}`,
       label: 'Editar Mapeamento',
       style: ButtonStyle.Secondary,
     }),
     new ButtonBuilder({
-      customId: `rr/config/remove/${title}`,
+      customId: `rr/config/removeMap/${title}`,
       label: 'Remover Mapeamento',
       style: ButtonStyle.Danger,
-    })
-  );
-
-  const actionRow = createRow(
+    }),
     new ButtonBuilder({
       customId: `rr/config/toggle_exclusive/${title}`,
       label: panel.mutuallyExclusive ? 'Exclusivo: ON' : 'Exclusivo: OFF',
       style: panel.mutuallyExclusive ? ButtonStyle.Success : ButtonStyle.Secondary,
     }),
+    new ButtonBuilder({
+      customId: `rr/config/change_content/${title}`,
+      label: 'Editar mensagem',
+      style: ButtonStyle.Primary,
+    }),
+  );
+
+  const actionRow = createRow(
     new ButtonBuilder({
       customId: `rr/config/publish/${title}`,
       label: 'Publicar',
@@ -127,7 +142,7 @@ export async function reactionPanelConfig_ConfigMenu<R>(guild: Guild, title: str
   );
 
   return {
-    components: [header, mappingsContainer, mainRow, actionRow],
+    components: [header, contentContainer, mappingsContainer, mainRow, actionRow],
     flags: [MessageFlags.Ephemeral, MessageFlags.IsComponentsV2],
   } satisfies InteractionReplyOptions as R;
 }

@@ -2,9 +2,7 @@ import { Schema } from 'mongoose';
 
 const mappingSchema = new Schema({
   emojiKey: { type: String, required: true }, // normalized unique key for emoji (unicode or custom)
-  emojiRaw: { type: String, required: true }, // original user input to show in UIs
   roleId: { type: String, required: true },
-  description: { type: String, default: '' },
 });
 
 export const reactionRolePanelSchema = new Schema(
